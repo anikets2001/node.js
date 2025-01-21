@@ -1,13 +1,15 @@
 const fs = require("fs");
+const path = require("path");
 
-const type = process.argv[2];
-const fileName = process.argv[3];
-const content = process.argv[4];
+const dirPath = path.join(__dirname, "files");
 
-if (type === "create") {
-  fs.writeFileSync(fileName, content, { flag: "a" });
-} else if (type === "remove") {
-  fs.unlinkSync(fileName);
-}else {
-    console.log('invalid input');
-}
+// for (let i = 0; i < 5; i++) {
+//   fs.writeFileSync(`${dirPath}/hello${i}.txt`, `This is ${i+1}th file's content`);
+// }
+
+fs.readdir(dirPath, (err, files) => {
+  if (err) {
+    return console.error("Error reading directory:", err);
+  }
+  files.forEach((file) => console.log(file));
+});
