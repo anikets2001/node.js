@@ -4,14 +4,11 @@ const app = express();
 
 app.get("/", (req, res) => {
   // req.query = 'Aniket'
-  res.send(`<h1>This is my homepage and my name is ${req.query.name}</h1>`);
+  res.send(`This is my homepage and my name is ${req.query.name}`);
 });
 
 app.get("/about", (req,res) => {
-  res.send({
-    name: 'Aniket',
-    role: 'front-end software engineer'
-  });
+  res.send("This is my about page");
 });
 
 app.listen(5000);
