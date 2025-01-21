@@ -9,6 +9,7 @@
   "author": "Aniket Singh",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.21.2",
     "simple-node-logger": "^21.8.12"
   }
 }
