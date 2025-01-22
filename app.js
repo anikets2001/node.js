@@ -15,9 +15,15 @@ app.get("/profile", (req, res) => {
   const user = {
     name: "Aniket",
     age: 25,
+    designation: 'software engineer',
+    skills: ['html', 'css', 'js']
   };
   res.render("profile", { user });
 });
+
+app.get('/login', (req,res)=> {
+    res.render('login')
+})
 
 app.get("/about", (req, res) => {
   res.sendFile(`${publicPath}/about.html`);
