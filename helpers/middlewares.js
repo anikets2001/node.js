@@ -1,3 +1,5 @@
+// middleware to allow users with age greater than 18 only(from query params)
+
 const reqFilter = (req, res, next) => {
   if (!req.query.age) {
     res.send("please enter age");
