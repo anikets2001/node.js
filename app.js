@@ -1,6 +1,7 @@
 // creating api(GET, POST, PUT, DELETE)
 
 const dbConnect = require("./mongodb/01_connectMongodb");
+const mongodb = require('mongodb')
 const express = require("express");
 const app = express();
 
@@ -22,7 +23,6 @@ app.post("/", async (req, res) => {
   res.send(result)
 });
 
-
 // put api 
 app.put('/', async(req,res)=>{
     let data = await dbConnect();
@@ -31,6 +31,19 @@ app.put('/', async(req,res)=>{
         {$set: req.body}
     )
     res.send(result)
+})
+
+// delete api
+app.delete('/:id', async(req,res)=> {
+    console.log(req.params.id)
+    const data =await dbConnect();
+    const result =await data.deleteOne({
+        _id: new mongodb.ObjectId(req.params.id)
+    })
+    res.send(result)
+    if(result.acknowledged){
+        console.log('deleted successfully...')
+    }
 })
 
 app.listen(5000);
