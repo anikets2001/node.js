@@ -1,5 +1,5 @@
 // for inserting single data(use insertOne function)
-const dbConnect = require("./01_connectMongodb");
+// const dbConnect = require("./01_connectMongodb");
 
 // const insert = async () => {
 //   const db = await dbConnect();

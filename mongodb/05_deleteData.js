@@ -1,4 +1,4 @@
-// const dbConnect = require("./mongodb/01_connectMongodb");
+// const dbConnect = require("./01_connectMongodb");
 
 // const deleteData = async () => {
 //   const data = await dbConnect();
@@ -11,7 +11,7 @@
 
 // deleteData();
 
-const dbConnect = require('./mongodb/01_connectMongodb');
+const dbConnect = require('./01_connectMongodb');
 
 const deleteData = async()=> {
   const data = await dbConnect();
