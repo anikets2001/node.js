@@ -1,49 +1,71 @@
-// creating api(GET, POST, PUT, DELETE)
+// mongoose is a npm library to connect node with mongodb
+// mongodb vs mongoose
+/*----
+mongoose provide more advance functionalities than mongodb
+example: restrict the number of fields in a collection
+validation apply (number of fields and types validations)
+it support schema and models
 
-const dbConnect = require("./mongodb/01_connectMongodb");
-const mongodb = require('mongodb')
-const express = require("express");
-const app = express();
 
-// for converting raw data to json(data coming from postman)
-app.use(express.json());
+Schema vs model
+Schema: fields defined in database
+Model: Use Schema to connect node js with mongodb
+----*/
 
-// get api
-app.get("/", async (req, res) => {
-  let data = await dbConnect();
-  let response = await data.find().toArray();
-  res.send(response);
+const mongoose = require("mongoose");
+
+const ProductsSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  brand: String,
+  category: String,
 });
 
-// getting data from postman and using express.json and getting body from req.body
-// post api
-app.post("/", async (req, res) => {
-  let data = await dbConnect();
-  let result = data.insertOne(req.body);
-  res.send(result)
+const NameSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
+  address: String,
 });
 
-// put api 
-app.put('/', async(req,res)=>{
-    let data = await dbConnect();
-    let result = data.updateOne(
-        {name: "i-phone 13"},
-        {$set: req.body}
-    )
-    res.send(result)
-})
+mongoose.connect("mongodb://localhost:27017/e-comm");
 
-// delete api
-app.delete('/:id', async(req,res)=> {
-    console.log(req.params.id)
-    const data =await dbConnect();
-    const result =await data.deleteOne({
-        _id: new mongodb.ObjectId(req.params.id)
-    })
-    res.send(result)
-    if(result.acknowledged){
-        console.log('deleted successfully...')
+const findInDb = async()=> {
+  const ProductModel = new mongoose.model('products', ProductsSchema);
+  const result = await ProductModel.find()
+  console.log(result);
+}
+
+findInDb()
+
+const saveInDb = async () => {
+  const ProductModel = new mongoose.model("products", ProductsSchema);
+
+  let data = new ProductModel({
+    name: "motorolla",
+    price: 1000,
+    brand: "Motorolla",
+    category: "mobile",
+  });
+  let result = await data.save();
+  console.log(result);
+};
+
+const updateInDb = async () => {
+  const User =new  mongoose.model("products", NameSchema);
+  let data = await User.updateOne(
+    { name: "Aniket" },
+    {
+      $set: { address: "Moradabad" },
     }
-})
+  );
 
-app.listen(5000);
+  console.log(data);
+};
+
+const deleteInDb = async()=> {
+  const ProductModel = new mongoose.model("products", ProductsSchema);
+  const result = await ProductModel.deleteMany({name: "motorolla"})
+  console.log(result)
+
+}
+
