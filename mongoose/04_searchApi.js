@@ -18,5 +18,5 @@ app.get("/search/:key", async (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log("starting server..");
+  console.log("starting server...");
 });
