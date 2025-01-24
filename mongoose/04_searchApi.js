@@ -1,7 +1,7 @@
 // search api with mongoose
 const express = require("express");
-require("./mongoose/config");
-const Product = require("./mongoose/products");
+require("./config");
+const Product = require("./products");
 
 const app = express();
 app.use(express.json());
